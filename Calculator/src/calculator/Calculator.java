@@ -57,6 +57,55 @@ public class Calculator {
 		btnSwitchTheme.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnSwitchTheme.addActionListener(event -> onScientificMode());
 
+		int j = -1;
+		int k = -1;
+
+		int[] x = { MARGIN_X, MARGIN_X + 90, 200, 290, 380 };
+		int[] y = { MARGIN_Y, MARGIN_Y + 100, MARGIN_Y + 180, MARGIN_Y + 260, MARGIN_Y + 340, MARGIN_Y + 420 };
+
+		// input polje
+		input = new JTextField("0");
+		input.setBounds(x[0], y[0], 350, 70);
+		input.setEditable(false);
+		input.setBackground(Color.WHITE);
+		input.setFont(new Font("Arial", Font.PLAIN, 33));
+		window.add(input);
+
+		// dugme za brisanje
+		btnC = new JButton("C");
+		btnC.setBounds(x[0], y[1], BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnC.setFont(btnFont);
+		btnC.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnC.addActionListener(event -> {
+
+			// possibly repaint font
+
+			input.setText("0");
+			opt = ' ';
+			val = 0;
+		});
+		window.add(btnC);
+
+		// dugme za brisanje jednog karaktera
+		btnBack = new JButton("<-");
+		btnBack.setBounds(x[1], y[1], BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnBack.setFont(btnFont);
+		btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnBack.addActionListener(event -> {
+
+			String currentText = input.getText();
+			StringBuilder str = new StringBuilder();
+
+			for (int i = 0; i < (currentText.length() - 1); i++) {
+				str.append(currentText.charAt(i));
+			}
+			if (currentText.toString().equals("")) {
+				input.setText("0");
+			} else {
+				input.setText(str.toString());
+			}
+
+		});
 	}
 
 	private void onSwitchTheme() {
