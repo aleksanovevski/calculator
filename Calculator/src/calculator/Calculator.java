@@ -38,6 +38,7 @@ public class Calculator {
 		Font btnFont = new Font("Arial", Font.BOLD, 28);
 		Font smallTxtBtnFont = new Font("Arial", Font.PLAIN, 24);
 
+		// button za promenu teme
 		btnSwitchTheme = new JButton();
 		btnSwitchTheme.setBounds(MARGIN_X, 30, 150, 18);
 		btnSwitchTheme.setForeground(Color.WHITE);
@@ -47,10 +48,15 @@ public class Calculator {
 		btnSwitchTheme.addActionListener(event -> onSwitchTheme());
 		window.add(btnSwitchTheme);
 
-		window.setLayout(null);
-		window.setResizable(false);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // If Click into The Red Button => End The Processus
-		window.setVisible(true);
+		// btn za dodatne scientific opcije
+		btnToScientific = new JButton();
+		btnSwitchTheme.setBounds(230, 30, 150, 18);
+		btnSwitchTheme.setForeground(Color.WHITE);
+		btnSwitchTheme.setBackground(Color.BLUE.brighter());
+		btnSwitchTheme.setText("Naucni mod");
+		btnSwitchTheme.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnSwitchTheme.addActionListener(event -> onScientificMode());
+
 	}
 
 	private void onSwitchTheme() {
@@ -135,6 +141,23 @@ public class Calculator {
 			btnRoot.setForeground(Color.WHITE);
 			isColoredSelected = true;
 		}
+	}
+
+	private void onScientificMode() {
+		if (isScientific) {
+			window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+			btnRoot.setVisible(true);
+			btnPower.setVisible(true);
+			btnLog.setVisible(true);
+			isScientific = false;
+		} else {
+			window.setSize(WINDOW_WIDTH + 80, WINDOW_HEIGHT);
+			btnRoot.setVisible(false);
+			btnPower.setVisible(false);
+			btnLog.setVisible(false);
+			isScientific = true;
+		}
+
 	}
 
 	public static void main(String[] args) {
